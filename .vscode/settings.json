@@ -1,0 +1,13 @@
+{
+  // Recording safety: .env never shows up in the sidebar, search or quick open.
+  "files.exclude": {
+    "**/.env": true,
+    "**/.env.local": true
+  },
+  "search.exclude": {
+    "**/.env": true
+  },
+  "editor.fontSize": 18,
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "on"
+}

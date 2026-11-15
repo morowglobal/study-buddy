@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Study Buddy</title>
+    <meta name="description" content="An AI study buddy that answers only from your notes, and shows where each answer came from." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23151412'/><text x='16' y='22' font-size='16' text-anchor='middle' fill='%23ffd23f' font-family='sans-serif' font-weight='700'>S</text></svg>" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">S</span>
+        <span>Study Buddy</span>
+      </div>
+      <span class="tag">answers only from your notes</span>
+    </header>
+
+    <main id="chat" class="chat" aria-live="polite">
+      <section class="empty" id="empty">
+        <h1>Ask your <em>notes</em> anything.</h1>
+        <p>Every answer comes from your class notes, with the exact source. If it is not in your notes, it says so.</p>
+        <div class="chips" id="chips">
+          <button type="button">Why does my average become NaN?</button>
+          <button type="button">When is the final project due?</button>
+          <button type="button">What are Ms. Rivera's code rules?</button>
+          <button type="button">What is the capital of France?</button>
+        </div>
+      </section>
+    </main>
+
+    <form class="composer" id="form" autocomplete="off">
+      <label class="sr-only" for="question">Your question</label>
+      <input id="question" name="question" maxlength="300" placeholder="Ask about your notes…" required />
+      <button type="submit" aria-label="Ask">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+    </form>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

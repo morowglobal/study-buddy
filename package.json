@@ -1,0 +1,16 @@
+{
+  "name": "study-buddy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An AI study buddy that answers only from your own notes (RAG with Gemini, no database).",
+  "type": "module",
+  "scripts": {
+    "ingest": "node --env-file=.env src/ingest.js",
+    "ask": "node --env-file=.env src/ask.js",
+    "dev": "node --env-file=.env server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20.6"
+  }
+}
