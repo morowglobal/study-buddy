@@ -16,8 +16,12 @@ export const config = {
   // Step 3: search. How many chunks we hand to the AI.
   topK: 3,
 
-  // Step 4: the chat model. If one model is busy or retired, the next one answers.
-  chatModels: [process.env.GEMINI_MODEL, 'gemini-flash-latest', 'gemini-3-flash-preview', 'gemini-flash-lite-latest'].filter(Boolean),
+  // Step 4: the chat model. If one model is busy, slow or retired, the next one answers.
+  // Lite goes first: it answers in about a second. gemini-flash-latest thinks for 25s+ on the free tier.
+  chatModels: [process.env.GEMINI_MODEL, 'gemini-flash-lite-latest', 'gemini-3-flash-preview', 'gemini-flash-latest'].filter(Boolean),
+
+  // Give up on a Gemini request after this long and try the next model.
+  requestTimeoutMs: 30000,
 
   maxQuestionChars: 300,
 };

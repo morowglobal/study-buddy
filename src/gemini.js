@@ -12,11 +12,21 @@ function apiKey() {
 
 async function post(url, body, { retries = 3 } = {}) {
   for (let attempt = 0; ; attempt++) {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey() },
-      body: JSON.stringify(body),
-    });
+    let res;
+    try {
+      res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey() },
+        body: JSON.stringify(body),
+        // Without a timeout, one slow model hangs the whole app.
+        signal: AbortSignal.timeout(config.requestTimeoutMs),
+      });
+    } catch (cause) {
+      const timedOut = cause.name === 'TimeoutError';
+      const error = new Error(timedOut ? `Gemini took longer than ${config.requestTimeoutMs / 1000}s` : `Gemini request failed: ${cause.message}`);
+      error.status = timedOut ? 504 : 503;
+      throw error;
+    }
     const data = await res.json().catch(() => ({}));
     if (res.ok) return data;
 
